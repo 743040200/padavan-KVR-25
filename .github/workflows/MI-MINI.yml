@@ -42,7 +42,7 @@ jobs:
         sed -i 's/SIZ=0x80000/SIZ=0x500000/g' /opt/rt-n56u/trunk/configs/boards/MI-MINI/kernel-3.4.x.config
         sed -i 's/size_etc="6M"/size_etc="9M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
         sed -i 's/size_tmp="24M"/size_tmp="30M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
-        sed -i 's/mtd_part_size=65536/mtd_part_size=5242880/g' /opt/rt-n56u/trunk/user/scripts/mtd_storage.sh
+        sed -i 's/mtd_part_size=65536/mtd_part_size=9242880/g' /opt/rt-n56u/trunk/user/scripts/mtd_storage.sh
     - name: Build Firmware
       env:
         TNAME: MI-MINI
