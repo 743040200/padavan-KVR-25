@@ -39,12 +39,12 @@ jobs:
         
         ##### 修改内存空间和 storage空间
         sed -i 's/SIZ=0x80000/SIZ=0x500000/g' /opt/rt-n56u/trunk/configs/boards/360P2/kernel-3.4.x.config
-        sed -i 's/size_etc="6M"/size_etc="9M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
+        sed -i 's/size_etc="3M"/size_etc="6M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
         sed -i 's/size_tmp="24M"/size_tmp="30M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
         sed -i 's/mtd_part_size=65536/mtd_part_size=9242880/g' /opt/rt-n56u/trunk/user/scripts/mtd_storage.sh
     - name: Build Firmware
       env:
-        TNAME: MI-MINI
+        TNAME: 360P2
         KERNEL: 3.4
       run: |
         cd /opt/rt-n56u/trunk
@@ -238,7 +238,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_HDPARM=y" >> .config
 
         ##包含 "parted" 工具（允许创建 GPT 分区）。约 0.3MB
-        echo "CONFIG_FIRMWARE_INCLUDE_PARTED=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> .config
 
         ##包含 SMB（和 WINS）服务器。约 1.5MB
         echo "CONFIG_FIRMWARE_INCLUDE_SMBD=n" >> .config
@@ -274,7 +274,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR_FAST_CODE=y" >> .config
 
         ##使用 OpenSSH 替代 dropbear。openssl 约 1.2MB，openssh 约 1.0MB
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=n" >> .config
 
         ##包含 StrongSwan。XFRM 模块约 0.2MB，strongswan 约 0.7MB
         echo "CONFIG_FIRMWARE_INCLUDE_SSWAN=n" >> .config
@@ -283,7 +283,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EC=y" >> .config
 
         ##包含 "openssl" 可执行程序，用于生成证书。约 0.4MB
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n" >> .config
 
         ##包含 xUPNPd IPTV 媒体服务器。约 0.3MB
         echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> .config
@@ -399,7 +399,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DDNSTO=n" >> .config #ddnsto 约800k  已删除 /trunk/user/httpd/common.h
         echo "CONFIG_FIRMWARE_INCLUDE_TAILSCALE=n" >> .config #tailscale 约20k
         echo "CONFIG_FIRMWARE_INCLUDE_NATPIERCE=n" >> .config #皎月连 约20k
-        echo "CONFIG_FIRMWARE_INCLUDE_VNTCLI=y" >> .config #vnt客户端 约80k
+        echo "CONFIG_FIRMWARE_INCLUDE_VNTCLI=n" >> .config #vnt客户端 约80k
         echo "CONFIG_FIRMWARE_INCLUDE_VNTS=n" >> .config #vnt服务端 约50k
         echo "CONFIG_FIRMWARE_INCLUDE_CLOUDFLARED=n" >> .config #CF的隧道 约50k
         echo "CONFIG_FIRMWARE_INCLUDE_LUCKY=n" >> .config #LUCKY 约50k
@@ -407,15 +407,15 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_EASYTIER=y" >> .config #EasyTier 约50k
         
         echo "CONFIG_FIRMWARE_INCLUDE_ALIST=n" >> .config #ALIST文件列表 约80k
-        echo "CONFIG_FIRMWARE_INCLUDE_WXSEND=y" >> .config #微信推送 约50k
+        echo "CONFIG_FIRMWARE_INCLUDE_WXSEND=n" >> .config #微信推送 约50k
         echo "CONFIG_FIRMWARE_INCLUDE_UUPLUGIN=n" >> .config #网易UU加速器 约50k
         
         echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=n" >> .config #阿里云盘 约50k
         sed -i 's/EVM_RESTART_ALDRIVER/EVM_RESTART_VIRTUALHERE/g' ./user/httpd/common.h
-        echo "CONFIG_FIRMWARE_INCLUDE_VIRTUALHERE=y" >> .config #virtualhere 约30k 后期需要自行下载可执行文件 在trunk/user/virtualhere 
+        echo "CONFIG_FIRMWARE_INCLUDE_VIRTUALHERE=n" >> .config #virtualhere 约30k 后期需要自行下载可执行文件 在trunk/user/virtualhere 
         
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config #网易云解锁 约80k 已删除 /trunk/user/httpd/common.h
-        echo "CONFIG_FIRMWARE_INCLUDE_BAFA=y" >> .config #巴法云 约90k
+        echo "CONFIG_FIRMWARE_INCLUDE_BAFA=n" >> .config #巴法云 约90k
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #在线文件管理服务不占空间(4.0kb左右)
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #adguardhome不占空间(7.2kb左右)
@@ -443,7 +443,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: MI-MINI
+        name: 360P2
         path: /opt/images
 
     - name: Release
