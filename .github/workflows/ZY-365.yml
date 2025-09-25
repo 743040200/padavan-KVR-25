@@ -185,7 +185,7 @@ jobs:
         echo "CONFIG_FIRMWARE_ENABLE_XFS=n" >> .config 
 
         ##启用 FUSE（用户空间文件系统）支持。约 0.1MB
-        echo "CONFIG_FIRMWARE_ENABLE_FUSE=y" >> .config
+        echo "CONFIG_FIRMWARE_ENABLE_FUSE=n" >> .config
 
         ##启用交换文件/分区支持。约 0.05MB
         echo "CONFIG_FIRMWARE_ENABLE_SWAP=y" >> .config
@@ -236,7 +236,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_TCPDUMP=y" >> .config
 
         ## 包含 "hdparm" 工具（允许设置硬盘节能超时时间和 APM）。约 0.1MB
-        echo "CONFIG_FIRMWARE_INCLUDE_HDPARM=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_HDPARM=n" >> .config
 
         ##包含 "parted" 工具（允许创建 GPT 分区）。约 0.3MB
         echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> .config
@@ -245,7 +245,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SMBD=n" >> .config
 
         ##使用 samba3.6 替代 samba3
-        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=n" >> .config
 
         ##包含 SMB 和 WINS 服务器的日志功能。约 0.3MB
         echo "CONFIG_FIRMWARE_INCLUDE_SMBD_SYSLOG=n" >> .config
