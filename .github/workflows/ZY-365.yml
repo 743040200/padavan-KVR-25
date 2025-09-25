@@ -203,10 +203,10 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_AUDIO=n" >> .config
 
         ##包含 XFRM（IPsec）模块及 iptables 扩展。约 0.2MB
-        echo "CONFIG_FIRMWARE_INCLUDE_XFRM=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_XFRM=n" >> .config
 
         ##包含网络 QoS 调度模块。约 0.2MB
-        echo "CONFIG_FIRMWARE_INCLUDE_QOS=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_QOS=n" >> .config
 
         ## 包含用于流量整形的 IMQ 模块（会略微降低性能）。约 0.02MB
         echo "CONFIG_FIRMWARE_INCLUDE_IMQ=y" >> .config
@@ -215,7 +215,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_IFB=y" >> .config
 
         ##包含 IPSet 工具和内核模块。约 0.4MB
-        #echo "CONFIG_FIRMWARE_INCLUDE_IPSET=y" >> .config
+        #echo "CONFIG_FIRMWARE_INCLUDE_IPSET=n" >> .config
 
         ##包含 NFSv3 服务器。约 0.6MB  已删除 /trunk/user/httpd/common.h
         echo "CONFIG_FIRMWARE_INCLUDE_NFSD=n" >> .config
@@ -233,7 +233,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_U2EC=n" >> .config
 
         ##包含 "tcpdump" 工具。约 0.6MB
-        echo "CONFIG_FIRMWARE_INCLUDE_TCPDUMP=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TCPDUMP=n" >> .config
 
         ## 包含 "hdparm" 工具（允许设置硬盘节能超时时间和 APM）。约 0.1MB
         echo "CONFIG_FIRMWARE_INCLUDE_HDPARM=n" >> .config
@@ -269,7 +269,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SFTP=n" >> .config
 
         ##包含 dropbear SSH。约 0.3MB
-        echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR=n" >> .config
 
         ## 加速 dropbear 的对称加密和哈希运算。约 0.06MB
         echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR_FAST_CODE=y" >> .config
@@ -281,7 +281,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SSWAN=n" >> .config
 
         ##为 openssl 库添加椭圆曲线（EC）支持。约 0.1MB
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EC=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EC=n" >> .config
 
         ##包含 "openssl" 可执行程序，用于生成证书。约 0.4MB
         echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n" >> .config
@@ -336,7 +336,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT=n" >> .config
 
          ## IPV6中继
-        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config
 
          ## ss服务器
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config
@@ -395,7 +395,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=y" >> .config  ## FRPS 服务端 约8k
         echo "CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n" >> .config  ## wireguard 约1M
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config ## tunsafe（wireguard的TCP方式）
-        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config ## zerotier 约 20k
+        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config ## zerotier 约 20k
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #阿里DDNS ~20k
         echo "CONFIG_FIRMWARE_INCLUDE_DDNSTO=n" >> .config #ddnsto 约800k  已删除 /trunk/user/httpd/common.h
         echo "CONFIG_FIRMWARE_INCLUDE_TAILSCALE=n" >> .config #tailscale 约20k
