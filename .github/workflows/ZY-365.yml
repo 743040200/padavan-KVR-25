@@ -391,8 +391,8 @@ jobs:
 
         ##################################
         
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config  ## FRPC 客户端 约8k
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=y" >> .config  ## FRPS 服务端 约8k
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config  ## FRPC 客户端 约8k
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config  ## FRPS 服务端 约8k
         echo "CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n" >> .config  ## wireguard 约1M
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config ## tunsafe（wireguard的TCP方式）
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config ## zerotier 约 20k
@@ -401,7 +401,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_TAILSCALE=n" >> .config #tailscale 约20k
         echo "CONFIG_FIRMWARE_INCLUDE_NATPIERCE=n" >> .config #皎月连 约20k
         echo "CONFIG_FIRMWARE_INCLUDE_VNTCLI=n" >> .config #vnt客户端 约80k
-        echo "CONFIG_FIRMWARE_INCLUDE_VNTS=n" >> .config #vnt服务端 约50k
+        echo "CONFIG_FIRMWARE_INCLUDE_VNTS=y" >> .config #vnt服务端 约50k
         echo "CONFIG_FIRMWARE_INCLUDE_CLOUDFLARED=n" >> .config #CF的隧道 约50k
         echo "CONFIG_FIRMWARE_INCLUDE_LUCKY=n" >> .config #LUCKY 约50k
         echo "CONFIG_FIRMWARE_INCLUDE_CLOUDFLARE=n" >> .config #CF-ddns 约50k
@@ -444,7 +444,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: 360P2
+        name: 360P2-8m
         path: /opt/images
 
     - name: Release
