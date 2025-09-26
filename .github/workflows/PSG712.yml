@@ -40,7 +40,7 @@ jobs:
         mkdir -p /opt/images/
 
         ##### 修改内存空间和 storage空间6m
-        sed -i 's/SIZ=0x80000/SIZ=0x500000/g' /opt/rt-n56u/trunk/configs/boards/PSG712/kernel-3.4.x-5.0.config
+        sed -i 's/SIZ=0x80000/SIZ=0x500000/g' /opt/rt-n56u/trunk/configs/boards/PSG712/kernel-3.4.x.config
         sed -i 's/size_etc="8M"/size_etc="7M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
         sed -i 's/size_tmp="24M"/size_tmp="30M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
         sed -i 's/mtd_part_size=85536/mtd_part_size=7242880/g' /opt/rt-n56u/trunk/user/scripts/mtd_storage.sh
