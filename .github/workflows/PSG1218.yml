@@ -264,10 +264,10 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DDNS_SSL=n" >> .config
 
         ##包含 HTTPS 支持。openssl 约 1.2MB
-        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config
 
         ##包含 sftp 服务器。openssl 约 1.2MB，sftp-server 约 0.06MB
-        echo "CONFIG_FIRMWARE_INCLUDE_SFTP=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_SFTP=y" >> .config
 
         ##包含 dropbear SSH。约 0.3MB
         echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR=y" >> .config
