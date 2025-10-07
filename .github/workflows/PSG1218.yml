@@ -40,7 +40,10 @@ jobs:
         mkdir -p /opt/images/
 
         
-        TNAME: PSG1218
+user/scripts/mtd_storage.sh
+    - name: Build Firmware
+      env:
+        TNAME: PSG712
         KERNEL: 3.4
       run: |
         cd /opt/rt-n56u/trunk
