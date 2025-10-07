@@ -204,19 +204,19 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_AUDIO=n" >> .config
 
         ##包含 XFRM（IPsec）模块及 iptables 扩展。约 0.2MB
-        echo "CONFIG_FIRMWARE_INCLUDE_XFRM=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_XFRM=y" >> .config
 
         ##包含网络 QoS 调度模块。约 0.2MB
-        echo "CONFIG_FIRMWARE_INCLUDE_QOS=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_QOS=y" >> .config
 
         ## 包含用于流量整形的 IMQ 模块（会略微降低性能）。约 0.02MB
-        echo "CONFIG_FIRMWARE_INCLUDE_IMQ=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_IMQ=y" >> .config
 
         ##包含用于流量整形的 IFB 模块。约 0.03MB
-        echo "CONFIG_FIRMWARE_INCLUDE_IFB=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_IFB=y" >> .config
 
         ##包含 IPSet 工具和内核模块。约 0.4MB
-        #echo "CONFIG_FIRMWARE_INCLUDE_IPSET=n" >> .config
+        #echo "CONFIG_FIRMWARE_INCLUDE_IPSET=y" >> .config
 
         ##包含 NFSv3 服务器。约 0.6MB  已删除 /trunk/user/httpd/common.h
         echo "CONFIG_FIRMWARE_INCLUDE_NFSD=n" >> .config
@@ -234,7 +234,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_U2EC=n" >> .config
 
         ##包含 "tcpdump" 工具。约 0.6MB
-        echo "CONFIG_FIRMWARE_INCLUDE_TCPDUMP=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TCPDUMP=y" >> .config
 
         ## 包含 "hdparm" 工具（允许设置硬盘节能超时时间和 APM）。约 0.1MB
         echo "CONFIG_FIRMWARE_INCLUDE_HDPARM=n" >> .config
@@ -258,7 +258,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_RPL2TP=n" >> .config
 
         ##包含 EAP-TTLS 和 EAP-PEAP 认证支持。openssl 约 1.2MB，wpa_supplicant 约 0.04MB
-        echo "CONFIG_FIRMWARE_INCLUDE_EAP_PEAP=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_EAP_PEAP=y" >> .config
 
         ##为 DDNS 客户端包含 HTTPS 支持。openssl 约 1.2MB
         echo "CONFIG_FIRMWARE_INCLUDE_DDNS_SSL=n" >> .config
@@ -276,16 +276,16 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR_FAST_CODE=y" >> .config
 
         ##使用 OpenSSH 替代 dropbear。openssl 约 1.2MB，openssh 约 1.0MB
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=y" >> .config
 
         ##包含 StrongSwan。XFRM 模块约 0.2MB，strongswan 约 0.7MB
         echo "CONFIG_FIRMWARE_INCLUDE_SSWAN=n" >> .config
 
         ##为 openssl 库添加椭圆曲线（EC）支持。约 0.1MB
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EC=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EC=y" >> .config
 
         ##包含 "openssl" 可执行程序，用于生成证书。约 0.4MB
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y" >> .config
 
         ##包含 xUPNPd IPTV 媒体服务器。约 0.3MB
         echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> .config
@@ -297,7 +297,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_FIREFLY=n" >> .config
 
         ##为 Minidlna 和 Firefly 包含 ffmpeg 0.11.x（替代 0.6.x）。约 0.1MB
-        echo "CONFIG_FIRMWARE_INCLUDE_FFMPEG_NEW=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_FFMPEG_NEW=y" >> .config
 
 
 
@@ -322,7 +322,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n" >> .config
         
         ## OpenVPN。需要 IPv6 支持。openssl 约 1.2MB，openvpn 约 0.4MB
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=y" >> .config
 
         ## 广东工业校园认证
         echo "CONFIG_FIRMWARE_INCLUDE_GDUT_DRCOM=n" >> .config
