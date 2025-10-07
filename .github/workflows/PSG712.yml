@@ -1,4 +1,3 @@
-
 name: PSG712-8m
 
 on: 
@@ -204,16 +203,16 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_AUDIO=n" >> .config
 
         ##包含 XFRM（IPsec）模块及 iptables 扩展。约 0.2MB
-        echo "CONFIG_FIRMWARE_INCLUDE_XFRM=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_XFRM=y" >> .config
 
         ##包含网络 QoS 调度模块。约 0.2MB
-        echo "CONFIG_FIRMWARE_INCLUDE_QOS=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_QOS=y" >> .config
 
         ## 包含用于流量整形的 IMQ 模块（会略微降低性能）。约 0.02MB
-        echo "CONFIG_FIRMWARE_INCLUDE_IMQ=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_IMQ=y" >> .config
 
         ##包含用于流量整形的 IFB 模块。约 0.03MB
-        echo "CONFIG_FIRMWARE_INCLUDE_IFB=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_IFB=y" >> .config
 
         ##包含 IPSet 工具和内核模块。约 0.4MB
         #echo "CONFIG_FIRMWARE_INCLUDE_IPSET=y" >> .config
@@ -234,7 +233,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_U2EC=n" >> .config
 
         ##包含 "tcpdump" 工具。约 0.6MB
-        echo "CONFIG_FIRMWARE_INCLUDE_TCPDUMP=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TCPDUMP=y" >> .config
 
         ## 包含 "hdparm" 工具（允许设置硬盘节能超时时间和 APM）。约 0.1MB
         echo "CONFIG_FIRMWARE_INCLUDE_HDPARM=n" >> .config
@@ -322,7 +321,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n" >> .config
         
         ## OpenVPN。需要 IPv6 支持。openssl 约 1.2MB，openvpn 约 0.4MB
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=y" >> .config
 
         ## 广东工业校园认证
         echo "CONFIG_FIRMWARE_INCLUDE_GDUT_DRCOM=n" >> .config
