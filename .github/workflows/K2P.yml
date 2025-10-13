@@ -222,7 +222,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_NFSD=n" >> .config
 
         ## 包含 CIFS（SMB）客户端。约 0.2MB
-        echo "CONFIG_FIRMWARE_INCLUDE_CIFS=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_CIFS=n" >> .config
 
         ##包含 NTFS-3G FUSE 驱动（替代 Paragon 的 "ufsd" 驱动）。约 0.4MB
         echo "CONFIG_FIRMWARE_INCLUDE_NTFS_3G=n" >> .config
@@ -264,7 +264,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DDNS_SSL=y" >> .config
 
         ##包含 HTTPS 支持。openssl 约 1.2MB
-        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=n" >> .config
 
         ##包含 sftp 服务器。openssl 约 1.2MB，sftp-server 约 0.06MB
         echo "CONFIG_FIRMWARE_INCLUDE_SFTP=y" >> .config
@@ -288,7 +288,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y" >> .config
 
         ##包含 xUPNPd IPTV 媒体服务器。约 0.3MB
-        echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> .config
 
         ##包含 Minidlna UPnP 媒体服务器。约 1.6MB
         echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=n" >> .config
@@ -358,10 +358,10 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config
 
          ## TTYD
-        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config
 
          ## 文件传输工具
-        echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config
 
          ## 系统状态监控工具
         echo "CONFIG_FIRMWARE_INCLUDE_HTOP=y" >> .config
@@ -370,7 +370,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_NANO=y" >> .config
 
          ## iperf3测速软件
-        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config
 
         ## DUMP1090
         echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=y" >> .config
