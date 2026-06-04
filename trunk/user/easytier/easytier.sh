@@ -18,6 +18,7 @@ et_web_bin="$(nvram get easytier_web_bin)"
 et_api_host="$(nvram get easytier_api_host)"
 et_uuid="$(nvram get easytier_uuid)"
 et_geoip="$(nvram get easytier_geoip)"
+et_extra_args="$(nvram get easytier_extra_args)"
 [ -z "$et_web_port" ] && et_web_port=22020
 [ -z "$et_web_api" ] && et_web_port=11211
 user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
@@ -252,7 +253,7 @@ start_core() {
           fi
          if [ ! -f "$et_core" ] ; then
                 logg "主程序${et_core}不存在，开始在线下载..."
-                  [ -z "$tag" ] && tag="v2.3.2"
+                  [ -z "$tag" ] && tag="v2.6.4"
                   dowload_et $tag
           fi
         sed -Ei '/【EasyTier_core】|^$/d' /tmp/script/_opt_script_check
@@ -332,7 +333,7 @@ start_web() {
          if [ ! -f "$et_web_bin" ] ; then
                   get_tag
                 logg "程序${et_web_bin}不存在，开始在线下载..."
-                  [ -z "$tag" ] && tag="v2.3.2"
+                  [ -z "$tag" ] && tag="v2.6.4"
                   dowload_web $tag
           fi
         sed -Ei '/【EasyTier_web】|^$/d' /tmp/script/_opt_script_check
@@ -352,6 +353,7 @@ start_web() {
         fi
         [ -z "$et_api_host" ] || webCMD="${webCMD} --api-host $et_api_host"
         [ -z "$et_geoip" ] || webCMD="${webCMD} --geoip-db $et_geoip"
+        [ -z "$et_extra_args" ] || webCMD="${webCMD} $et_extra_args"
           [ "$et_web_log" = "1" ] && webCMD="${webCMD} --console-log-level warn"
         [ "$et_web_log" = "2" ] && webCMD="${webCMD} --console-log-level info"
         [ "$et_web_log" = "3" ] && webCMD="${webCMD} --console-log-level debug"
