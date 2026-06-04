@@ -6,18 +6,14 @@ et_core="$(nvram get easytier_bin)"
 et_log="$(nvram get easytier_log)"
 et_ports="$(nvram get easytier_ports)"
 et_tunname="$(nvram get easytier_tunname)"
-et_hostname="$(nvram get easytier_hostname)"
 et_web_enable="$(nvram get easytier_web_enable)"
 et_web_db="$(nvram get easytier_web_db)"
 et_web_port="$(nvram get easytier_web_port)"
 et_web_protocol="$(nvram get easytier_web_protocol)"
 et_web_api="$(nvram get easytier_web_api)"
 et_web_log="$(nvram get easytier_web_log)"
-et_html_port="$(nvram get easytier_html_port)"
+et_web_html="$(nvram get easytier_web_html)"
 et_web_bin="$(nvram get easytier_web_bin)"
-et_api_host="$(nvram get easytier_api_host)"
-et_uuid="$(nvram get easytier_uuid)"
-et_geoip="$(nvram get easytier_geoip)"
 [ -z "$et_web_port" ] && et_web_port=22020
 [ -z "$et_web_api" ] && et_web_port=11211
 user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
@@ -205,11 +201,6 @@ web_keep() {
          [ -s /tmp/easytier_web.log ] && [ "\$(stat -c %s /tmp/easytier_web.log)" -gt 4194304 ] && echo "" > /tmp/easytier_web.log & #【EasyTier_web】
         OSC
 
-        if [ ! -z "$et_html_port" ] ; then
-        cat >> "/tmp/script/_opt_script_check" <<-OSC
-         [ -z "\$(iptables -L -n -v | grep '$et_html_port')" ] && logger -t "进程守护" "EasyTier_web 防火墙规则失效" && eval "$scriptfilepath start &" && sed -Ei '/【EasyTier_web】|^$/d' /tmp/script/_opt_script_check #【EasyTier_web】
-        OSC
-        fi
         fi
 
 }
@@ -252,7 +243,7 @@ start_core() {
           fi
          if [ ! -f "$et_core" ] ; then
                 logg "主程序${et_core}不存在，开始在线下载..."
-                  [ -z "$tag" ] && tag="v2.3.0"
+                  [ -z "$tag" ] && tag="v2.2.4"
                   dowload_et $tag
           fi
         sed -Ei '/【EasyTier_core】|^$/d' /tmp/script/_opt_script_check
@@ -265,28 +256,12 @@ start_core() {
                         exit 1
                 fi
                 [ -f /etc/storage/et_machine_id ] || touch /etc/storage/et_machine_id
-                if [ ! -s /etc/storage/et_machine_id ]; then
-                        if [ -z "$et_uuid" ] ; then
-                                cat /proc/sys/kernel/random/uuid > /etc/storage/et_machine_id
-                                et_uuid="$(cat /etc/storage/et_machine_id | tr -d ' \n')"
-                                nvram set easytier_uuid="$et_uuid"
-                                nvram commit
-                                logg "/etc/storage/et_machine_id 为空，生成新的设备uuid $et_uuid"
-                        else
-                                echo "$et_uuid" > /etc/storage/et_machine_id
-                        fi
-                fi
-                core_uuid="$(cat /etc/storage/et_machine_id | tr -d ' \n')"
-                #mkdir -p /var/lib/dbus
-                #ln -sf /etc/storage/et_machine_id /var/lib/dbus/machine-id
-                #[ -f "${bin_path}/et_machine_id" ] || ln -sf /etc/storage/et_machine_id ${bin_path}/et_machine_id
+                [ -f "${bin_path}/et_machine_id" ] || ln -sf /etc/storage/et_machine_id ${bin_path}/et_machine_id
                 [ "$et_log" = "1" ] && CMD="--console-log-level warn"
                 [ "$et_log" = "2" ] && CMD="--console-log-level info"
                 [ "$et_log" = "3" ] && CMD="--console-log-level debug"
                 [ "$et_log" = "4" ] && CMD="--console-log-level trace"
                 [ "$et_log" = "5" ] && CMD="--console-log-level error"
-                [ -z "$core_uuid" ] || CMD=" --machine-id $core_uuid $CMD"
-                [ ! -z "$et_hostname" ] && CMD="--hostname $et_hostname $CMD"
                 CMD="-w $config_server $CMD"
         else
                 [ "$et_log" = "1" ] && CMD="--console-log-level warn"
@@ -324,7 +299,20 @@ start_web() {
                 et_core=/tmp/var/easytier-web
                   nvram set easytier_web_bin=$et_web_bin
             fi
-
+             mkdir -p /tmp/file
+          if [ -f "$et_web_html" ] ; then
+                  cp -rf "$et_web_html" /tmp/file/et.html
+                  lan_ip=`nvram get lan_ipaddr`
+                  nvram set easytier_api="http://${lan_ip}/tmp/et.html"
+                    logg "Web控制台：http://${lan_ip}/tmp/et.html"
+              else
+                       curl -Lko /tmp/file/et.html https://easytier.cn/web || curl -Lko /tmp/file/et.html https://easytier.cn/web/index.html
+                 if [ "$?" = 0 ] ; then
+                         lan_ip=`nvram get lan_ipaddr`
+                          nvram set easytier_api="http://${lan_ip}/tmp/et.html"
+                            logg "Web控制台：http://${lan_ip}/tmp/et.html"
+               fi
+          fi
             if [ -f "$et_web_bin" ] ; then
                 [ ! -x "$et_web_bin" ] && chmod +x $et_web_bin
                   [[ "$($et_web_bin -h 2>&1 | wc -l)" -lt 2 ]] && logg "程序${et_web_bin}不完整！" && rm -rf $et_web_bin
@@ -332,7 +320,7 @@ start_web() {
          if [ ! -f "$et_web_bin" ] ; then
                   get_tag
                 logg "程序${et_web_bin}不存在，开始在线下载..."
-                  [ -z "$tag" ] && tag="v2.3.0"
+                  [ -z "$tag" ] && tag="v2.2.4"
                   dowload_web $tag
           fi
         sed -Ei '/【EasyTier_web】|^$/d' /tmp/script/_opt_script_check
@@ -345,13 +333,6 @@ start_web() {
         [ -z "$et_web_port" ] || webCMD="${webCMD} -c $et_web_port" 
         [ -z "$et_web_protocol" ] || webCMD="${webCMD} -p $et_web_protocol" 
         [ -z "$et_web_api" ] || webCMD="${webCMD} -a $et_web_api" 
-        if [ -z "$et_html_port" ] ; then
-                webCMD="${webCMD} --no-web" 
-        else
-                webCMD="${webCMD} -l $et_html_port" 
-        fi
-        [ -z "$et_api_host" ] || webCMD="${webCMD} --api-host $et_api_host"
-        [ -z "$et_geoip" ] || webCMD="${webCMD} --geoip-db $et_geoip"
           [ "$et_web_log" = "1" ] && webCMD="${webCMD} --console-log-level warn"
         [ "$et_web_log" = "2" ] && webCMD="${webCMD} --console-log-level info"
         [ "$et_web_log" = "3" ] && webCMD="${webCMD} --console-log-level debug"
@@ -377,10 +358,6 @@ start_web() {
                 ip6tables -I INPUT -p tcp --dport "$et_web_api" -j ACCEPT
                 iptables -I INPUT -p udp --dport "$et_web_api" -j ACCEPT
                 ip6tables -I INPUT -p udp --dport "$et_web_api" -j ACCEPT
-                if [ ! -z "$et_html_port" ] ; then
-                        iptables -I INPUT -p tcp --dport "$et_html_port" -j ACCEPT 
-                        ip6tables -I INPUT -p tcp --dport "$et_html_port" -j ACCEPT
-                fi
         else
                 logg "运行失败, 注意检查${et_web_bin}是否下载完整,10 秒后自动尝试重新启动"
                   sleep 10
@@ -429,10 +406,6 @@ stop_et() {
         ip6tables -D INPUT -p tcp --dport "$et_web_api" -j ACCEPT >/dev/null 2>&1
         iptables -D INPUT -p udp --dport "$et_web_api" -j ACCEPT >/dev/null 2>&1
         ip6tables -D INPUT -p udp --dport "$et_web_api" -j ACCEPT >/dev/null 2>&1
-        if [ ! -z "$et_html_port" ] ; then
-                iptables -D INPUT -p tcp --dport "$et_html_port" -j ACCEPT >/dev/null 2>&1
-                ip6tables -D INPUT -p tcp --dport "$et_html_port" -j ACCEPT >/dev/null 2>&1
-        fi
         [ -z "`pidof easytier-core`" ] && [ -z "`pidof easytier-web`" ] && logg "进程已关闭!"
         if [ ! -z "$scriptname" ] ; then
                 eval $(ps -w | grep "$scriptname" | grep -v $$ | grep -v grep | awk '{print "kill "$1";";}')
@@ -603,4 +576,3 @@ status)
         #exit 0
         ;;
 esac
-
