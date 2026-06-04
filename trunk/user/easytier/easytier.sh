@@ -1,7 +1,13 @@
 #!/bin/sh
 
-#=========新增固定指定版本，只改这里版本号即可=========
+#=========固定指定版本，按需修改=========
 FIX_TAG="v2.3.0"
+#补充缺失磁盘检测函数，修复exit code 2
+check_disk_size() {
+    local dir="$1"
+    mkdir -p "$dir"
+    df -P "$dir" | awk 'NR==2{printf "%.2f",$4/1024}'
+}
 
 et_enable=$(nvram get easytier_enable)
 config_server="$(nvram get easytier_config_server)"
