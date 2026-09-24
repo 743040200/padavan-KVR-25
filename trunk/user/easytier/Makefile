@@ -22,11 +22,11 @@ endef
 
 define Package/easytier/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) ./files/easytier-core $(1)/usr/bin/
-	$(INSTALL_BIN) ./files/easytier-cli $(1)/usr/bin/
+	$(INSTALL_BIN) ./easytier-core $(1)/usr/bin/
+	$(INSTALL_BIN) ./easytier-cli $(1)/usr/bin/
 
 	$(INSTALL_DIR) $(1)/etc/scripts
-	$(INSTALL_BIN) ./files/easytier.sh $(1)/etc/scripts/
+	$(INSTALL_BIN) ./easytier.sh $(1)/etc/scripts/
 endef
 
 $(eval $(call BuildPackage,easytier))
