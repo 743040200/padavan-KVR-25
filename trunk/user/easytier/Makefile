@@ -6,7 +6,8 @@ all:
 extract_test:
 
 config_test:
+
 clean:
 
 romfs:
-        $(ROMFSINST) $(THISDIR)/easytier.sh /usr/bin/easytier.sh
+	$(ROMFSINST) $(THISDIR)/easytier.sh /usr/bin/easytier.sh
