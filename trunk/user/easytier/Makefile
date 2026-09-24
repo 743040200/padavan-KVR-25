@@ -4,7 +4,7 @@ PKG_NAME:=easytier
 PKG_VERSION:=2.3.0
 PKG_RELEASE:=1
 
-include $(INCLUDE_DIR)/package.mk
+include $(TOPDIR)/package.mk
 
 define Package/easytier
   SECTION:=net
