@@ -1,4 +1,3 @@
-
 name: MI-MINI
 
 on: 
@@ -38,12 +37,12 @@ jobs:
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
-        
-        ##### 修改内存空间和 storage空间 4m
-        sed -i 's/SIZ=0x80000/SIZ=400000/g' /opt/rt-n56u/trunk/configs/boards/MI-MINI/kernel-3.4.x.config
-        sed -i 's/size_etc="6M"/size_etc="9M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
+
+        ##### 修改内存空间和 storage空间3.5m
+        sed -i 's/SIZ=0x80000/SIZ=380000/g' /opt/rt-n56u/trunk/configs/boards/MI-MINI/kernel-3.4.x.config
+        sed -i 's/size_etc="6M"/size_etc="3.5M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
         sed -i 's/size_tmp="24M"/size_tmp="30M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
-        sed -i 's/mtd_part_size=65536/mtd_part_size=4194304/g' /opt/rt-n56u/trunk/user/scripts/mtd_storage.sh
+        sed -i 's/mtd_part_size=65536/mtd_part_size=3670016/g' /opt/rt-n56u/trunk/user/scripts/mtd_storage.sh
     - name: Build Firmware
       env:
         TNAME: MI-MINI
@@ -51,12 +50,12 @@ jobs:
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
-        echo "configs/templates/$TNAME.config 没有找到 "
+        echo "configs/templates/$TNAME.config 没有找到  "
         exit 1
         fi
         cp -f configs/templates/$TNAME.config .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
- ################################################################################################
+        ################################################################################################
         ###  清除默认配置###
         sed -i '/CONFIG_FIRMWARE_ENABLE_IPV6/d' .config
         sed -i '/CONFIG_FIRMWARE_ENABLE_USB/d' .config
@@ -428,7 +427,9 @@ jobs:
         #echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #无需集成会在线下载
         #echo "CONFIG_FIRMWARE_INCLUDE_XRAY=n" >> .config #无需集成会在线下载
         #echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #无需集成会在线下载
-        #echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=n" >> .config # simple-obfs混淆插件 #########################################################################################
+        #echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=n" >> .config # simple-obfs混淆插件
+        
+        #########################################################################################
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
