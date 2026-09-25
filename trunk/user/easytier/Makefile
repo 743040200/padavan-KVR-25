@@ -1,13 +1,15 @@
-APP_NAME := easytier
+SRC_NAME = EasyTier
+THISDIR = $(shell pwd)
 
-all: install
+all:
 
-install:
-	mkdir -p $(INSTALL_ROOT)/usr/bin
-	mkdir -p $(INSTALL_ROOT)/etc/scripts
-	install -m 755 ./easytier-core  $(INSTALL_ROOT)/usr/bin/
-	install -m 755 ./easytier-cli  $(INSTALL_ROOT)/usr/bin/
-	install -m 755 ./easytier.sh   $(INSTALL_ROOT)/etc/scripts/
+extract_test:
+
+config_test:
 
 clean:
-	@true
+
+romfs:
+	$(ROMFSINST) $(THISDIR)/easytier-core    /etc/storage/bin/easytier-core
+	$(ROMFSINST) $(THISDIR)/easytier-cli     /etc/storage/bin/easytier-cli
+	$(ROMFSINST) $(THISDIR)/easytier.sh      /usr/bin/easytier.sh
