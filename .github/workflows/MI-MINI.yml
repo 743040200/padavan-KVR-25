@@ -38,11 +38,11 @@ jobs:
         sh dl_toolchain.sh
         mkdir -p /opt/images/
         
-        ##### 修改内存空间和 storage空间
-        sed -i 's/SIZ=0x80000/SIZ=0x500000/g' /opt/rt-n56u/trunk/configs/boards/MI-MINI/kernel-3.4.x.config
+        ##### 修改内存空间和 storage空间 8m
+        sed -i 's/SIZ=0x80000/SIZ=400000/g' /opt/rt-n56u/trunk/configs/boards/MI-MINI/kernel-3.4.x.config
         sed -i 's/size_etc="6M"/size_etc="9M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
         sed -i 's/size_tmp="24M"/size_tmp="30M"/g' /opt/rt-n56u/trunk/user/scripts/dev_init.sh
-        sed -i 's/mtd_part_size=65536/mtd_part_size=9242880/g' /opt/rt-n56u/trunk/user/scripts/mtd_storage.sh
+        sed -i 's/mtd_part_size=65536/mtd_part_size=4194304/g' /opt/rt-n56u/trunk/user/scripts/mtd_storage.sh
     - name: Build Firmware
       env:
         TNAME: MI-MINI
@@ -55,7 +55,7 @@ jobs:
         fi
         cp -f configs/templates/$TNAME.config .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
-        ################################################################################################
+ ################################################################################################
         ###  清除默认配置###
         sed -i '/CONFIG_FIRMWARE_ENABLE_IPV6/d' .config
         sed -i '/CONFIG_FIRMWARE_ENABLE_USB/d' .config
@@ -179,13 +179,13 @@ jobs:
         echo "CONFIG_FIRMWARE_ENABLE_EXT3=n" >> .config
         
         #启用 EXT4（同时支持 EXT3/EXT2）文件系统支持。约 0.4MB
-        echo "CONFIG_FIRMWARE_ENABLE_EXT4=y" >> .config
+        echo "CONFIG_FIRMWARE_ENABLE_EXT4=n" >> .config
         
         ##启用 XFS 文件系统支持。约 0.6MB
         echo "CONFIG_FIRMWARE_ENABLE_XFS=n" >> .config 
 
         ##启用 FUSE（用户空间文件系统）支持。约 0.1MB
-        echo "CONFIG_FIRMWARE_ENABLE_FUSE=y" >> .config
+        echo "CONFIG_FIRMWARE_ENABLE_FUSE=n" >> .config
 
         ##启用交换文件/分区支持。约 0.05MB
         echo "CONFIG_FIRMWARE_ENABLE_SWAP=y" >> .config
@@ -236,16 +236,16 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_TCPDUMP=y" >> .config
 
         ## 包含 "hdparm" 工具（允许设置硬盘节能超时时间和 APM）。约 0.1MB
-        echo "CONFIG_FIRMWARE_INCLUDE_HDPARM=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_HDPARM=n" >> .config
 
         ##包含 "parted" 工具（允许创建 GPT 分区）。约 0.3MB
-        echo "CONFIG_FIRMWARE_INCLUDE_PARTED=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> .config
 
         ##包含 SMB（和 WINS）服务器。约 1.5MB
         echo "CONFIG_FIRMWARE_INCLUDE_SMBD=n" >> .config
 
         ##使用 samba3.6 替代 samba3
-        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=n" >> .config
 
         ##包含 SMB 和 WINS 服务器的日志功能。约 0.3MB
         echo "CONFIG_FIRMWARE_INCLUDE_SMBD_SYSLOG=n" >> .config
@@ -263,10 +263,10 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DDNS_SSL=n" >> .config
 
         ##包含 HTTPS 支持。openssl 约 1.2MB
-        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config
 
         ##包含 sftp 服务器。openssl 约 1.2MB，sftp-server 约 0.06MB
-        echo "CONFIG_FIRMWARE_INCLUDE_SFTP=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_SFTP=y" >> .config
 
         ##包含 dropbear SSH。约 0.3MB
         echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR=y" >> .config
@@ -292,15 +292,15 @@ jobs:
         ##包含 Minidlna UPnP 媒体服务器。约 1.6MB
         echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=n" >> .config
 
-        ##包含 Firefly iTunes 媒体服务器。约 1.0MB 
+        ##包含 Firefly iTunes 媒体服务器。约 1.0MB
         echo "CONFIG_FIRMWARE_INCLUDE_FIREFLY=n" >> .config
 
         ##为 Minidlna 和 Firefly 包含 ffmpeg 0.11.x（替代 0.6.x）。约 0.1MB
-        echo "CONFIG_FIRMWARE_INCLUDE_FFMPEG_NEW=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_FFMPEG_NEW=y" >> .config
 
 
 
-        ##包含 Transmission 种子下载工具。openssl 约 1.2MB，transmission 约 1.5MB 已删除 请查看/trunk/user/httpd/common.h
+        ##包含 Transmission 种子下载工具。openssl 约 1.2MB，transmission 约 1.5MB 已删除 /trunk/user/httpd/common.h
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=n" >> .config
 
         ##包含 Transmission-Web-Control（高级 WebUI）。约 0.8MB 已删除 /trunk/user/httpd/common.h
@@ -321,7 +321,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n" >> .config
         
         ## OpenVPN。需要 IPv6 支持。openssl 约 1.2MB，openvpn 约 0.4MB
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=y" >> .config
 
         ## 广东工业校园认证
         echo "CONFIG_FIRMWARE_INCLUDE_GDUT_DRCOM=n" >> .config
@@ -372,27 +372,27 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config
 
         ## DUMP1090
-        echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=y" >> .config
 
         ## RTL_SDR
-        echo "CONFIG_FIRMWARE_INCLUDE_RTL_SDR=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_RTL_SDR=y" >> .config
 
         ## MTR
         echo "CONFIG_FIRMWARE_INCLUDE_MTR=y" >> .config
 
         ## ipv6端口转发工具
-        echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=y" >> .config
 
         ## SRELAY代理
-        echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=y" >> .config
 
         ## MENTOHUST校园认证 已删除 请查看/trunk/user/httpd/common.h
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config
 
         ##################################
         
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config  ## FRPC 客户端 约8k
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=y" >> .config  ## FRPS 服务端 约8k
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config  ## FRPC 客户端 约8k
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config  ## FRPS 服务端 约8k
         echo "CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n" >> .config  ## wireguard 约1M
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config ## tunsafe（wireguard的TCP方式）
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config ## zerotier 约 20k
@@ -401,22 +401,18 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_TAILSCALE=n" >> .config #tailscale 约20k
         echo "CONFIG_FIRMWARE_INCLUDE_NATPIERCE=n" >> .config #皎月连 约20k
         echo "CONFIG_FIRMWARE_INCLUDE_VNTCLI=y" >> .config #vnt客户端 约80k
-        echo "CONFIG_FIRMWARE_INCLUDE_VNTS=n" >> .config #vnt服务端 约50k
+        echo "CONFIG_FIRMWARE_INCLUDE_VNTS=y" >> .config #vnt服务端 约50k
         echo "CONFIG_FIRMWARE_INCLUDE_CLOUDFLARED=n" >> .config #CF的隧道 约50k
         echo "CONFIG_FIRMWARE_INCLUDE_LUCKY=n" >> .config #LUCKY 约50k
         echo "CONFIG_FIRMWARE_INCLUDE_CLOUDFLARE=n" >> .config #CF-ddns 约50k
         echo "CONFIG_FIRMWARE_INCLUDE_EASYTIER=y" >> .config #EasyTier 约50k
         
         echo "CONFIG_FIRMWARE_INCLUDE_ALIST=n" >> .config #ALIST文件列表 约80k
-        echo "CONFIG_FIRMWARE_INCLUDE_WXSEND=y" >> .config #微信推送 约50k
+        echo "CONFIG_FIRMWARE_INCLUDE_WXSEND=n" >> .config #微信推送 约50k
         echo "CONFIG_FIRMWARE_INCLUDE_UUPLUGIN=n" >> .config #网易UU加速器 约50k
-        
         echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=n" >> .config #阿里云盘 约50k
-        sed -i 's/EVM_RESTART_ALDRIVER/EVM_RESTART_VIRTUALHERE/g' ./user/httpd/common.h
-        echo "CONFIG_FIRMWARE_INCLUDE_VIRTUALHERE=y" >> .config #virtualhere 约30k 后期需要自行下载可执行文件 在trunk/user/virtualhere 
-        
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config #网易云解锁 约80k 已删除 /trunk/user/httpd/common.h
-        echo "CONFIG_FIRMWARE_INCLUDE_BAFA=y" >> .config #巴法云 约90k
+        echo "CONFIG_FIRMWARE_INCLUDE_BAFA=n" >> .config #巴法云 约90k
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #在线文件管理服务不占空间(4.0kb左右)
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #adguardhome不占空间(7.2kb左右)
@@ -431,9 +427,7 @@ jobs:
         #echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #无需集成会在线下载
         #echo "CONFIG_FIRMWARE_INCLUDE_XRAY=n" >> .config #无需集成会在线下载
         #echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #无需集成会在线下载
-        #echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=n" >> .config # simple-obfs混淆插件
-        
-        #########################################################################################
+        #echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=n" >> .config # simple-obfs混淆插件 #########################################################################################
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
