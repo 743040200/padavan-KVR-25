@@ -13,3 +13,5 @@ romfs:
 	$(ROMFSINST) $(THISDIR)/easytier-core /usr/bin/easytier-core
 	$(ROMFSINST) $(THISDIR)/easytier-cli /usr/bin/easytier-cli
 	$(ROMFSINST) $(THISDIR)/easytier.sh /usr/bin/easytier.sh
+ chmod 755 $(ROMFSDIR)/usr/bin/easytier-core
+ chmod 755 $(ROMFSDIR)/usr/bin/easytier-cli
