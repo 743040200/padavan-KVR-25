@@ -243,7 +243,7 @@ start_core() {
 	[ "$et_enable" = "0" ] && return 1
 	logg "正在启动easytier-core"
   	if [ -z "$et_core" ] ; then
-		et_core=/tmp/var/easytier-core
+		et_core=/usr/bin/easytier-core
   		nvram set easytier_bin=$et_core
     	fi
 	get_tag
