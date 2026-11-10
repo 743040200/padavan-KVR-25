@@ -1,5 +1,5 @@
 
-name: PSG712-8m
+name: PSG712-16m
 
 on: 
   workflow_dispatch:
