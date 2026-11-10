@@ -836,7 +836,7 @@ function button_vntcli_status() {
 	<tr>
 	<th style="border: 0 none;">程序路径</th>
 	<td style="border: 0 none;">
-	<textarea maxlength="1024" class="input" name="vntcli_bin" id="vntcli_bin" placeholder="/etc/storage/bin/vnt-cli" style="width: 210px; height: 20px; resize: both; overflow: auto;"><% nvram_get_x("","vntcli_bin"); %></textarea>
+	<textarea maxlength="1024" class="input" name="vntcli_bin" id="vntcli_bin" placeholder="/usr/bin/vnt-cli" style="width: 210px; height: 20px; resize: both; overflow: auto;"><% nvram_get_x("","vntcli_bin"); %></textarea>
 	</div><br><span style="color:#888;">自定义程序的存放路径，填写完整的路径和程序名称</span>
 	</tr>
 	</table>
