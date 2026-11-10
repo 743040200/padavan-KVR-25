@@ -9,5 +9,7 @@ config_test:
 clean:
 
 romfs:
-	$(ROMFSINST) $(THISDIR)/vnt.sh /usr/bin/vnt.sh
-
+	$(ROMFSINST) -e /usr/bin/vntcli
+	$(ROMFSINST) -e /usr/bin/vntctl.sh
+	chmod 755 $(ROMFSDIR)/usr/bin/vntcli
+	chmod 755 $(ROMFSDIR)/usr/bin/vntctl.sh
