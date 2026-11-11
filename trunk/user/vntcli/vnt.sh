@@ -186,7 +186,7 @@ start_vntcli() {
   	if [ -z "$VNTCLI" ] ; then
   		etc_size=`check_disk_size /etc/storage`
       		if [ "$etc_size" -gt 1 ] ; then
-			VNTCLI=/etc/storage/bin/vnt-cli
+			VNTCLI=/usr/bin/vnt-cli
    		else
      			VNTCLI=/tmp/var/vnt-cli
 		fi
