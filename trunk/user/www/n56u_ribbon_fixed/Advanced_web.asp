@@ -607,7 +607,7 @@ function applyRule(){
 											</td>
 										</tr>
 										<tr id="row_weasytier" style="display:none">
-											<th width="50%" >EasyTier</th>
+											<th width="50%" >异地组网</th>
 											<td>
 													<div class="main_itoggle">
 													<div id="w_easytier_on_of">
