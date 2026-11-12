@@ -353,7 +353,7 @@ function button_etweb(){
 	<td id="easytier_status"></td><td></td>
 	</tr>
 	<tr>
-	<th width="30%" style="border-top: 0 none;">启用easytier</th>
+	<th width="30%" style="border-top: 0 none;">启用异地组网</th>
 	<td style="border-top: 0 none;">
 	<select name="easytier_enable" class="input" onChange="change_easytier_enable();" style="width: 218px;">
 	<option value="0" <% nvram_match_x("","easytier_enable", "0","selected"); %>>【关闭】</option>
