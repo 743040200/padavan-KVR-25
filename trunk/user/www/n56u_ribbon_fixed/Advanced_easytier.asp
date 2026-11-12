@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><#Web_Title#> - EasyTier</title>
+<title><#Web_Title#> - 异地组网</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -339,8 +339,8 @@ function button_etweb(){
 	<div id="tabMenu" class="submenuBlock"></div>
 	<div id="wnd_et_cfg">
 	<div class="alert alert-info" style="margin: 10px;">
-	由 Rust 和 Tokio 驱动✨ 一个简单、安全、去中心化的异地组网方案。<br>
-	<div>项目地址：<a href="https://github.com/EasyTier/Easytier" target="blank">github.com/EasyTier/Easytier</a>&nbsp;&nbsp;&nbsp;&nbsp;官网：<a href="https://easytier.cn/" target="blank">easytier.cn</a>&nbsp;&nbsp;&nbsp;&nbsp;QQ群：<a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=6fJoWLm7bKKBHnx0uPKjFBeQz-UVpCVZ&authKey=Zp4K7V7UQfADF6UJdP%2FgoGAhuv%2FT5qGlx%2FZEuQsOmIiiF1p8piy6lfDZnoxTaKH6&noverify=0&group_code=949700262" target="blank">949700262</a></div>
+	异地组网定制服务｜多厂区/门店监控互通，远程运维 【全网通方案】简单、安全、去中心化方案。<br>
+	《异地组网-定制内置版》-专注安防-✨俊✨【监控闭路~网络维护】
 	<br><div>当前版本:【<span style="color: #FFFF00;"><% nvram_get_x("", "easytier_ver"); %></span>】&nbsp;&nbsp;最新版本:【<span style="color: #FD0187;"><% nvram_get_x("", "easytier_ver_n"); %></span>】 </div>
 	</div>
 	<table width="100%" cellpadding="4" cellspacing="0" class="table">
